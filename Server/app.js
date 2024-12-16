@@ -3,7 +3,8 @@ const cors = require("cors")
 require("express-async-errors");
 const connectDB =require("./config/db");
 const productRoutes=require('./routes/product.route');
-const authRoutes=require('./routes/auth.route')
+const authRoutes=require('./routes/auth.route');
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 
@@ -12,7 +13,7 @@ connectDB();
 app.use(express.static("uploads"));
 
 app.use(cors())
-
+app.use(cookieParser());
 app.use(express.static("uploads"));
 
 app.use(express.json())

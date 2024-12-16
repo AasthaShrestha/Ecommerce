@@ -4,7 +4,8 @@ const { JWT_SECRET } = require("../config/constant");
 const checkAuth = (role) => {
   return (req, res, next) => {
     try {
-      const decoded = jwt.verify(req.headers.token, JWT_SECRET);
+      console.log(req.cookies);
+      const decoded = jwt.verify(req.cookies.token, JWT_SECRET);
       req.authUser = decoded;
       console.log(decoded);
       if (role && !req.authUser.roles.includes(role)) {

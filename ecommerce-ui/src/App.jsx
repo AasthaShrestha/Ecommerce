@@ -8,6 +8,7 @@ import NavBar from "./Components/NavBar";
 import Products from "./pages/Products";
 import Dashboard from "./pages/Dashboard";
 import DashboardProducts from "./pages/dashboard/DashboardProducts";
+import ProductForm from "./pages/dashboard/ProductForm";
 
 const queryClient = new QueryClient();
 const AuthUserContext = createContext(null);
@@ -67,17 +68,18 @@ function App() {
               <Route path="/orders" element={<h2>Orders Page</h2>} />
               <Route path="/profile" element={<h2>Profile Page</h2>} />
             </Route>
+
             <Route element={<AdminRoutes/>}>
-              <Route element={<Dashboard/>} >
-              <Route path="/dashboard/products" element={<DashboardProducts/>} />
-              </Route>
-              <Route element={<Dashboard/>} >
-              <Route path="/dashboard/orders" element={<h2>Orders List</h2>} />
-              </Route>
-              <Route element={<Dashboard/>} >
-              <Route path="/dashboard/users" element={<h2>Users List</h2>} />
+              <Route path="/dashboard" element={<Dashboard/>} >
+                <Route index element={<h2>Dashboard section</h2>} />
+                <Route path="products" element={<DashboardProducts/>} />
+                <Route path="products/add" element={<ProductForm/>} />
+                <Route path="products/edit/:productId" element={<ProductForm/>} />
+                <Route path="orders" element={<h2>Orders List</h2>} />
+                <Route path="users" element={<h2>Users List</h2>} />
               </Route>
             </Route>
+
             <Route element={<GuestRoutes />}>
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />

@@ -52,7 +52,14 @@ const signIn=async(req,res)=>{
             }
         );
 
-        delete user.password;
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate()+20);
+     
+    res.cookie("token",token,{
+        httpOnly:true,
+        expires:expiresAt,
+    });
+
       res.status(200).json({
         message: "Signed In Successfully",
         token,

@@ -32,7 +32,7 @@ router.post("/", checkAuth(), upload.single("image"), addProduct);
 
 router.patch("/:id", checkAuth("Admin"), updateProduct);
 
-router.delete("/:id", checkAuth("Super Admin"), deleteProduct);
+router.delete("/:id", checkAuth("Admin"), deleteProduct);
 
 router.get("/:id", getProductById);
 router.post("/order", checkAuth(), createOrder);
