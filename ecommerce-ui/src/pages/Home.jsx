@@ -8,11 +8,13 @@ import { Typography } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
 const getFeaturedProducts = async () => {
-  const res = await axios.get("http://localhost:3000/api/products/featured");
+  const res = await axios.get("/api/products/featured");
+  console.log("Featured products res:", res.data);
   return res.data.data;
 };
 const getLatestProducts = async () => {
-  const res = await axios.get("http://localhost:3000/api/products/latest");
+  const res = await axios.get("/api/products/latest");
+  console.log("latest products res:", res.data);
   return res.data.data;
 };
 
@@ -24,7 +26,7 @@ export default function Home() {
 
   const Latest = useQuery({
     queryKey: ["latest-products"],
-    queryFn: getLatestProducts,
+    queryFn:getLatestProducts,
   });
 
   return (
@@ -50,7 +52,7 @@ export default function Home() {
             </Grid>
           </>
         ) : (
-          query.data.map((product) => {
+          query.data?.map((product) => {
             return (
               <Grid key={product._id} size={{ md: 3 }}>
                 <ProductCard product={product} />
@@ -79,7 +81,7 @@ export default function Home() {
             </Grid>
           </>
         ) : (
-          Latest.data.map((product) => {
+          Latest.data?.map((product) => {
             return (
               <Grid key={product._id} size={{ md: 3 }}>
                 <ProductCard product={product} />
